@@ -23,10 +23,15 @@ namespace SignalRTest.Controllers
             _logger = logger;
             this.hub = hub;
         }
+        [HttpGet("SendNotification")]
+        public IActionResult SendNotification()
+        {
+            return Ok();
+        }
         [HttpGet("ws")]
         public async Task Get()
         {
-            await hub.Clients.All.SendAsync("", new { Message = "Message" });
+            await hub.Clients.All.SendAsync("SendNotification", new { Message = "Message" });
         }
 
     }
