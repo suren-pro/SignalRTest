@@ -27,6 +27,14 @@ namespace SignalRTest
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder
+                    .WithOrigins("https://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
             services.AddSignalR();
         }
 

@@ -9,14 +9,15 @@ namespace SignalRTest
         {
            
         }
-        public async Task<string> Join(string groupName)
+
+        public async Task Join(string groupName)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId,groupName);
-            return Context.ConnectionId;
+            await Clients.Client(Context.ConnectionId).SendAsync("getResponse","barev");
         }
         public async Task SendMerchantMessage(string connectionId, string message,string group)
         {
-            await Clients.Client(connectionId).SendAsync("", message);
+            await Clients.Client(connectionId).SendAsync("getResponse", message);
         }
     }
 }

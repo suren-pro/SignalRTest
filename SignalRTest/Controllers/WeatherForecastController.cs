@@ -24,8 +24,9 @@ namespace SignalRTest.Controllers
             this.hub = hub;
         }
         [HttpGet("SendNotification")]
-        public IActionResult SendNotification()
+        public async Task<IActionResult> SendNotification()
         {
+            await hub.Clients.All.SendAsync("SendNotification","Edo");
             return Ok();
         }
         [HttpGet("ws")]
