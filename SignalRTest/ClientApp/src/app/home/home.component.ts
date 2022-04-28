@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '../notification.service';
 import { SignalrService } from '../signalr.service';
 
 @Component({
@@ -7,23 +8,15 @@ import { SignalrService } from '../signalr.service';
 })
 export class HomeComponent implements OnInit {
 
-  textMessage!: string;
-  answer: any[] = [];
-
-  constructor(private signalService: SignalrService){
+  constructor(private signalService: SignalrService, private notifyService: NotificationService){
 
   }
 
   ngOnInit(): void {
-    // this.signalService.startConnection()
-  }
+    this.signalService.startConnection()
 
+    this.signalService.listenerWS()
 
-  sendMessage()
-  {
-    // this.signalService.addData(this.textMessage)
-    //   this.signalService.listenerWS()
-    //   if(this.signalService.data_new != undefined)
-    //   this.answer.push(this.signalService.data_new)
+    this.notifyService.getPermission()
   }
 }

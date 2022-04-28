@@ -1,20 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { HttpClient } from '@aspnet/signalr';
-import * as signalR from '@microsoft/signalr'
-// import * as signalR from '@aspnet/signalr'
+// import * as signalR from '@microsoft/signalr'
+import * as signalR from '@aspnet/signalr'
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignalrService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private notifyService: NotificationService) {
 
   }
 
   hubConnection!: signalR.HubConnection;
-  data_new: any;
+  data_new: any = 'First';
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -33,16 +34,12 @@ export class SignalrService {
   }
 
   listenerWS = () =>{
-    this.hubConnection.on('sendNotification', (data:any) => {
-    this.data_new =  data
+    this.hubConnection.on('sendNotification', (data)=>{
+    // this.notifyService.getPermission()
+    this.notifyService.sendNotification(data)
     })
   }
 
-
-  getReq()
-  {
-    return this.http.get('https://localhost:44307/ws')
-  }
 
 
 }
