@@ -16,7 +16,10 @@ export class HomeComponent implements OnInit {
     this.signalService.startConnection()
 
     this.signalService.listenerWS()
-
     this.notifyService.getPermission()
+    setTimeout(() => {
+      this.signalService.addData('123')
+
+    }, 2000);
   }
 }

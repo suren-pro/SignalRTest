@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@aspnet/signalr';
-// import * as signalR from '@microsoft/signalr'
 import * as signalR from '@aspnet/signalr'
+// import * as signalR from '@aspnet/signalr'
 import { NotificationService } from './notification.service';
 
 @Injectable({
@@ -19,7 +18,8 @@ export class SignalrService {
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-                            .withUrl('https://localhost:44307/orderHub')
+                            .withUrl('https://localhost:44307/orderHub', {accessTokenFactory: ()=> 'barevaper'})
+                            .withAutomaticReconnect()
                             .build();
     this.hubConnection
       .start()

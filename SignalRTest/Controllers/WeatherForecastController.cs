@@ -32,7 +32,7 @@ namespace SignalRTest.Controllers
         [HttpGet("ws")]
         public async Task Get()
         {
-            await hub.Clients.All.SendAsync("SendNotification", new { Message = "Message" });
+            await hub.Clients.Group("123").SendAsync("SendNotification", new { Message = "Message" });
         }
 
     }
