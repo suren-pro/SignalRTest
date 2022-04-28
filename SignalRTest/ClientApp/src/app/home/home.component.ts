@@ -7,28 +7,23 @@ import { SignalrService } from '../signalr.service';
 })
 export class HomeComponent implements OnInit {
 
+  textMessage!: string;
+  answer: any[] = [];
+
   constructor(private signalService: SignalrService){
 
   }
 
   ngOnInit(): void {
-    this.signalService.startConnection()
-    this.signalService.listenerWS()
-    this.signalService.addBroadcastChartDataListener()
-  //   let ws = new WebSocket('wss://localhost:5001/ws')
-  //   ws.onopen = (data) =>{
-  //     console.log(data);
-  //   }
-  //   ws.onclose = () => {
-  //     console.log('closed')
-  //   }
+    // this.signalService.startConnection()
+  }
 
-  //   ws.onerror = (err) =>
-  //   {
-  //     console.log(err)
-  //   }
-  //   ws.onmessage = (obj) =>{
-  //     console.log(obj.data)
-  //   }
+
+  sendMessage()
+  {
+    // this.signalService.addData(this.textMessage)
+    //   this.signalService.listenerWS()
+    //   if(this.signalService.data_new != undefined)
+    //   this.answer.push(this.signalService.data_new)
   }
 }
